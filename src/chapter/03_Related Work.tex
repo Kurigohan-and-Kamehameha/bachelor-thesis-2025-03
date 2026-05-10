@@ -1,0 +1,51 @@
+\chapter{Related Work}
+    \section{Visual Recognition Models}
+        \cite{visual_recognition_models_paper} In der Arbeit „Are Visual Recognition Models Robust to Image Compression?“ wird untersucht, 
+        wie sich verschiedene Bildkompressionsmethoden wie JPEG auf die Leistung von visuellen Erkennungsmodellen auswirken. Dabei liegt der Fokus darauf, die Robustheit von Modellen zu analysieren, die für Aufgaben wie Bildklassifikation, Objekterkennung und Bildsegmentierung verwendet werden.
+
+        Das Ziel der Studie ist es, zu bewerten, wie empfindlich Modelle auf die Kompression von Eingabebildern reagieren, und zu untersuchen, ob durch Anpassungen, wie beispielsweise die Feinabstimmung auf komprimierte Daten, die Auswirkungen der Kompression gemildert werden können.\\
+
+        \underline{Erkenntnisse dieser Studie:}
+        \begin{enumerate}
+            \item Auswirkungen der Kompression
+            \begin{itemize}
+                \item Eine zu starke Kompression führt zu einem signifikanten Rückgang der Modellleistung.
+                \item Verschiedene Modelle reagieren unterschiedlich empfindlich auf die Art und Stärke der Kompression.
+            \end{itemize}
+            \item Modellanpassung
+            \begin{itemize}
+                \item Modelle wie z.B. ResNet oder Vision Transformers schneiden oft besser ab als einfache Modell Architekturen.
+                \item Die Feinabstimmung (Fine-Tuning) von Modellen auf komprimierte Bilder kann die Leistung wieder verbessern.
+            \end{itemize}
+            \item Relevanz
+            \begin{itemize}
+                \item In Echtzeitanwendungen wie autonomen Fahrzeugen oder\\
+                Überwachungssystemen könnte die Optimierung von Modellen für komprimierte Daten dazu beitragen, die Bandbreite zu reduzieren, ohne die Systemleistung wesentlich zu beeinträchtigen.
+            \end{itemize}
+        \end{enumerate}      
+
+\newpage
+    \section{Learned Image Compression}
+        \cite{image_compression_paper} Die Arbeit „Learned Image Compression for Machine Perception“ untersucht die Entwicklung und Anwendung von lernbasierten Bildkompressionsmethoden, die speziell auf die Anforderungen maschineller Wahrnehmung\\
+        ausgerichtet sind, insbesondere im Kontext von Computer Vision und maschinellen Lernmodellen. Anstatt traditionelle Bildkompressionsmethoden wie JPEG oder PNG zu verwenden, die für die menschliche Wahrnehmung optimiert sind, wird hier ein Ansatz verfolgt, der die Kompression so gestaltet, dass sie sowohl für Menschen als auch für Maschinen, wie z. B. Objekterkennungsmodelle, effektiv ist.
+
+        Ziel der Studie ist es, zu zeigen, dass speziell für maschinelle Wahrnehmung\\
+        optimierte Bildkompressionsmethoden zu einer besseren Leistung in\\
+        Visual-Recognition-Aufgaben führen können.\\
+        Auch die Bildkompression sollte an ML-Modelle angepasst werden, um gleichzeitig die Nutzung zu optimieren und um genauere Modellvorhersagen zu erhalten.\\
+
+        \underline{Erkenntnisse dieser Studie:}
+        \begin{enumerate}
+            \item Lernbasierte Kompressionstechniken
+            \begin{itemize}
+                \item Statt traditioneller Bildkompression wie JPEG wird eine lernbasierte Kompression verwendet, die während des Trainings eines Modells lernt, welche Bildinformationen für maschinelles Lernen wichtig sind und welche entfernt werden können.
+            \end{itemize}
+            \item Vorteile gegenüber traditioneller Kompression
+            \begin{itemize}
+                \item Lernbasierte Kompressionsmethoden bieten eine signifikante Verbesserung in der Effizienz und Performance, besonders in Szenarien, bei denen Bandbreite und Speicherplatz begrenzt sind (wie beim autonomen Fahren oder in mobilen Geräten).
+            \end{itemize}
+            \item Verkürzte Übertragungszeiten und optimierte Modellleistung
+            \begin{itemize}
+                \item Durch die Verwendung von speziell für maschinelles Lernen entwickelten Kompressionsmethoden können große Bildmengen schneller übertragen werden, ohne die Modellgenauigkeit signifikant zu beeinträchtigen. Dies ist besonders wichtig in Anwendungen wie dem autonomen Fahren, wo schnelle Entscheidungen basierend auf Bilddaten getroffen werden müssen.
+            \end{itemize}
+        \end{enumerate}      

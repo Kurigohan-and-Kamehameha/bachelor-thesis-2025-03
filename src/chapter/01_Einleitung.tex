@@ -1,0 +1,20 @@
+\chapter{Einleitung}
+    In der heutigen Zeit rückt das autonome Fahren immer mehr in den Vordergrund, was aus Nachrichten und veröffentlichten Berichten der Medien bekannt ist \cite{autonom}. Zwischen Theorie und Praxis existieren dennoch verschiedene Probleme, die eigenständige Lösungsansätze erfordern. 
+    Ein Auto, das vollständig automatisiert fahren soll, muss sehr große Mengen an Daten aus der Umgebung erfassen. Dazu zählen Sensordaten über das Fahrzeug selbst, wie Geschwindigkeit, Reifendruck oder GPS-Daten und insbesondere große Mengen an Bilddaten. Bilddaten machen mit Abstand den größten Speicherbedarf aus (Reis, Philipp, 2024, Mitarbeiter am FZI) \cite{overload}.
+    
+    Häufig sollen diese Daten zur Weiterverarbeitung oder für analytische Zwecke in eine Cloud übertragen werden, da eine Verarbeitung vor Ort nicht effizient ist. Zudem ist es kostspielig, jedes Auto mit zusätzlicher Hardware auszustatten, um solche Datenmengen effizient zu verarbeiten. Ein weiterer Aspekt ist, dass die Daten ansonsten auf die einzelnen Autos verteilt wären. Es ist jedoch deutlich einfacher, die Daten in einem einzigen Rechenzentrum zu bündeln.
+    Amazon Web Services oder Microsoft Azure bieten praktische Lösungen, um Daten sicher in einer gehosteten Cloud auszulagern. Die Automobilindustrie, welcher die Fahrzeuge gehören, kann natürlich auch firmeninterne Server verwenden, um die Daten dort zu sichern, auf einem zentralen Server. Aufgrund der großen Menge an Daten ist dies in der Praxis jedoch keine triviale Aufgabe.
+    
+    Am Forschungszentrum Informatik (FZI) gibt es praktische Versuche mit einem Audi, welcher bezeichnet wird als „CoCar NextGen“, das mit entsprechenden Kameras ausgestattet ist und während der Fahrt Bilddaten aufzeichnet.
+    Diese werden von bis zu neun hochauflösenden HD-Kameras, die am Auto installiert sind, aufgezeichnet, um die Umgebung möglichst präzise, $360^\circ$ um das Auto herum abzubilden, was zu großen Datenmengen führt \cite{fzi_car}. 
+    
+    Allein an Bilddaten entstehen bei neun HD-Kameras, welche mit $30$ FPS und einer Farbtiefe von $24$-Bit aufzeichnen würden $13,41$ GBit/s –\\ das sind etwa $1$ TB nach nur $10$ Minuten Fahrt. Diese Daten während der Fahrt in die Cloud hochzuladen, erfordert viel Bandbreite. Dafür ist die Upload-Geschwindigkeit oft zu gering, und der Speicher im Fahrzeug würde sich schnell füllen \cite{overload}.
+    
+\newpage 
+    Die Reduktion und Rekonstruktion von Daten ist ein Lösungsansatz, um dieses Problem der Praxis des autonomen Fahrens zu beheben.
+    Komprimierte Daten sind speichersparender und können anschließend in die Cloud hochgeladen werden, wo sie weiterverarbeitet werden.
+    Dies kann durch herkömmliche Komprimierung, wie verlustbehaftete Bildformate, erfolgen oder mithilfe von KI-Modellen, die die Daten komprimieren, um sie in die Cloud hochzuladen. Anschließend können sie von einem spezialisierten Modell rekonstruiert werden, das für die Wiederherstellung der Bilder optimiert ist. Die rekonstruierten Bilder sollten dabei dem Original so genau wie möglich entsprechen.
+
+    Diese Arbeit stellt sich die Frage, inwieweit sich verlustbehaftete sowie rekonstruierte Daten von den Originalen unterscheiden und ob auf Basis dieser immer noch gleiche Aussagen getroffen werden können.
+
+    Die Struktur der Arbeit gliedert sich in ein Grundlagenverständnis und eine Übersicht der verwandten Arbeiten (Related Work) sowie einen Einblick in das Konzept, das umgesetzt wird. Für die Evaluation werden Bilder eines zur Domäne passenden Datensatzes, die unterschiedlichen Kompressionsstufen unterzogen wurden (sowohl traditionelle als auch KI-basierte Kompression), miteinander und untereinander verglichen. Dies erfolgt anhand verschiedener Metriken, um eine fundierte Auswertung zu ermöglichen. Zudem wird ein KI-Modell eingesetzt, um die Bilder auf Objektdetektion zu überprüfen. Aus den Ergebnissen werden Schlussfolgerungen gezogen, ob es Abhängigkeiten, Gemeinsamkeiten oder Kausalitäten gibt.

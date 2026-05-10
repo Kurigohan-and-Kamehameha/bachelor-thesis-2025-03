@@ -1,0 +1,19 @@
+\chapter{Fazit}
+    Die Arbeit zeigt, dass zwischen den KI-Daten und den JPEG-Daten wiederholt Übereinstimmungen auftreten, etwa beim Abschneiden der Modelle im Vergleich zu den Metriken der JPEG-Datensätze. Auch die Metriken untereinander zeigen konsistente Übereinstimmungen in Abhängigkeit vom Kompressionsfaktor. Es bestehen Abhängigkeiten zwischen der Bildqualität und dem Kompressionsfaktor sowie Kausalitäten, die darauf hindeuten, dass Bilder mit geringerer Qualität zu schlechteren Ergebnissen in der Objekterkennung führen.
+    
+    Als abschließendes Fazit dieser Arbeit lässt sich feststellen, dass es in der Praxis möglich ist, Bilder so zu komprimieren, dass Bandbreite eingespart werden kann, um Bilder zu übertragen. Allerdings zeigt die Arbeit auch, dass die Performance von Modellen, welche auf rekonstruierten Daten Vorhersagen treffen sollen, maßgeblich von zwei Hauptfaktoren abhängt.
+    
+    Zum einen muss die Qualität des komprimierten Bildes nahezu identisch zum Original bleiben, d.h. ein SSIM-Wert, welcher den Wert $1,0$ approximiert. Dies ist mit traditionellen Kompressionsverfahren wie JPEG nicht zu erreichen, wenn gleichzeitig ein hoher Kompressionsgrad angestrebt wird, wie Kompressionsfaktoren von $50+$ aufwärts. Hierfür sind lernbasierte Kompressionsverfahren erforderlich. Allerdings steht auch bei diesen Verfahren eine zu starke Kompression in direktem Konflikt mit dem Qualitätsverlust des Bildes. 
+    Metriken wie SSIM haben gezeigt, dass KI-basierte komprimierte und rekonstruierte Bilder in Bezug auf Kontrast, Struktur und Helligkeit deutlich bessere Ergebnisse liefern als JPEG-komprimierte Bilder, was deren Qualität betrifft. 
+
+    Der zweite Hauptfaktor liegt im Modell, das nachträglich auf den Bildern eingesetzt wird. Obwohl in dieser Arbeit alle Bilder mit demselben Modell evaluiert werden, treten dennoch deutliche Diskrepanzen auf. Das Modell, das mit den Daten gespeist wird, muss ausreichend auf diese Art von Daten trainiert werden und über passende Features und Labels verfügen. In diesem Fall ist ein YOLO-Modell, das speziell auf Cityscapes-Daten trainiert wird, robuster gegenüber solchen Diskrepanzen. Auch hier gibt es einen kausalen Zusammenhang zwischen dem Modell, welches für die Objektdetektion zuständig ist, und der Genauigkeit der Vorhersagen.
+
+\newpage
+    Da es beim autonomen Fahren um Menschenleben geht, müssen Modelle zur Einsparung von Bandbreite auch anhand weiterer Metriken genauestens evaluiert werden, ob diese auch den Ansprüchen gerecht werden und mit den zur Domäne passenden Daten ausreichend trainiert wurden.
+    Zur Evaluation sollten zudem Metriken angewandt werden, welche die menschliche Wahrnehmung berücksichtigen. Unter keinen Umständen darf die Bildqualität zugunsten von Bandbreite und Speicherplatz geopfert werden. Modelle mit niedrigeren Kompressionsfaktoren, beispielsweise $50$ statt $219,43$ oder $192$, erzielen deutlich bessere Ergebnisse, da mehr Informationen im latenten Raum zur Rekonstruktion zur Verfügung stehen.
+    Die beiden getesteten Modelle haben wertvolle Einblicke in die Möglichkeiten und das Potenzial lernbasierter Kompression geliefert, sind jedoch für eine sicherheitskritische Domäne wie das autonome Fahren ungeeignet, da sie in ihrer Performance deutlich zu schwach abschneiden.
+
+    In der Zukunft des autonomen Fahrens werden KI-Modelle zum Einsatz kommen,
+    um in Bandbreite und Speicherkapazitäten zu sparen – vorausgesetzt, die beiden Hauptfaktoren werden dabei berücksichtigt.
+    
+    

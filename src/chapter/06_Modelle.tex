@@ -1,0 +1,69 @@
+\chapter{Modelle} 
+    \cite{rombach2021highresolution, https://doi.org/10.48550/arxiv.2204.11824} In dieser Arbeit werden zwei Modelle zur Bildreduktion und Rekonstruktion verwendet. Beide Modelle sind\\
+    \textbf{Vector-Quantised-Variational-Autoencoder (VQ-VAE)},\\
+    die mithilfe eines Codebooks die latente Darstellung abbilden und daraus das Bild rekonstruieren.\\
+    Beide VQ-VAEs haben die Spezifikationen f, VQ(Z, d).\\
+    \textbf{vq-f16}: f=16, VQ (Z=16384, d=8)\\
+    \textbf{vq-f8-n256}: f=8, VQ (Z=256, d=4)
+    
+    \begin{itemize} \item \( f \): \textbf{Patch-Größe}
+        \begin{itemize}
+            \item \( f \) Steht für die Größe der Bildpatches in die das Eingabebild unterteilt wird.
+                    Die Patch-Größe bestimmt die räumliche Auflösung der latenten Darstellung.
+            \item Für \( f = 16 \) wird das Bild in \( 16 \times 16 \)-Pixel große Blöcke (Patches) zerlegt.\\
+            Für \( f = 8 \) in \( 8 \times 8 \)-Pixel große Blöcke.
+        \end{itemize}
+    \end{itemize}
+
+    \begin{itemize} \item \( Z \): \textbf{Codebuchgröße}
+        \begin{itemize}
+            \item \( Z \) ist die Größe des Codebuchs, also die Anzahl der Vektoren\\(Codebook-Vektoren),
+            die für die Repräsentation der Patches verfügbar sind.
+            Jeder Patch wird auf einen Vektor aus diesem Codebuch abgebildet.
+            \item Ein größeres Codebuch (z.B. $Z=16384$) bietet eine feinere Auflösung der Quantisierung, während ein kleineres Codebuch (z.B. $Z=256$) weniger Speicherplatz benötigt, aber potenziell Informationen verliert.
+        \end{itemize}
+    \end{itemize}
+
+    \begin{itemize} \item \( d \): \textbf{Latente Dimension}
+        \begin{itemize}
+            \item \( d \) ist die Dimension der latenten Repräsentation eines jeden Patches nach der Quantisierung. Ein Patch von Größe $f \times f$ wird auf einen latenten Vektor der Länge $d$ reduziert.
+            \item Für $d=8$ wird ein Patch auf einen 8-dimensionalen Vektor komprimiert.\\
+            Für $d=4$ ist die Kompression stärker, da die Information in nur 4 Dimensionen kodiert wird.
+        \end{itemize}
+    \end{itemize}
+
+\newpage
+    \section{Theoretische Kompression}
+        \cite{rombach2021highresolution, https://doi.org/10.48550/arxiv.2204.11824} Beide Modelle nehmen die gleichen Bilder entgegen, liefern jedoch unterschiedlich große latente Repräsentationen. Ein Bild hat die Größe $(3 \times 1024 \times 2048)$ und liegt als float32 (4 Bytes) vor, welches vom Modell entgegengenommen wird.
+        
+        \begin{enumerate}
+        \item \textbf{Latente Darstellung vq-f16}: f=16, VQ (Z=16384, d=8)\\
+            \textbf{f = 16:} Das Bild wird in Blöcke von $16 \times 16$ Pixeln zerlegt.
+            \begin{addmargin}[45pt]{0pt}
+            Anzahl der Blöcke in der Höhe: $1024 \div 16 = 64$\\
+            Anzahl der Blöcke in der Breite: $2048 \div 16 = 128$
+            \end{addmargin}
+            \textbf{d = 8:} Jeder Block wird auf einen Vektor der Dimension 8 abgebildet.\\
+            Latent Shape: ($8 \times 64 \times 128$)
+        \item \textbf{Latente Darstellung vq-f8-n256}: f=8, VQ (Z=256, d=4)\\
+            \textbf{f = 8:} Das Bild wird in Blöcke von $8 \times 8$ Pixeln zerlegt.
+            \begin{addmargin}[45pt]{0pt}
+            Anzahl der Blöcke in der Höhe: $1024 \div 8 = 128$\\
+            Anzahl der Blöcke in der Breite: $2048 \div 8 = 256$
+            \end{addmargin}
+            \textbf{d = 4:} Jeder Block wird auf einen Vektor der Dimension 4 abgebildet.\\
+            Latent Shape: ($4 \times 128 \times 256$)
+        \end{enumerate}
+    
+        Da es sich um VQ-VAEs handelt, werden die Einträge der latenten Vektoren auf die Einträge des Codebuchs abgebildet. Die Einträge des Codebuchs sind fest, d.h. es reicht aus, lediglich die Indizes der Codebuch-Einträge zu speichern. Es wird also keine kompletten 4 Bytes (float32) benötigt, sondern lediglich die Anzahl an Bits, um die Codebuchgröße $Z$ darzustellen.
+        
+        \begin{center}  
+                $\text{Anzahl Werte} = 3 * 1024  * 2048 = 6.291.456$ \\
+                $\text{Speicherbedarf (Bytes)} = 6.211.548 * 4 \text{Byte} = 25.165.824 \text{Bytes}$\\
+                $Z_{vq-f16} = 16384 \quad 14\text{Bits} = \frac{\ln{16384}}{\ln{2}}$\\
+                $25.165.824\text{Bytes} \div (8 * 64 * 128 * \frac{14}{8}\text{Bytes}) \approx 219,43$
+                $Z_{vq-f8-n256} = 256 \quad 8\text{Bits} = \frac{\ln{256}}{\ln{2}}$\\
+                $25.165.824\text{Bytes} \div (4 * 128 * 256 * \frac{8}{8}\text{Bytes}) = 192$
+         \end{center}
+
+        Somit ergibt sich ein Kompressionsfaktor von $219,43$ für vq-f16 und $192$ für vq-f8-n256.

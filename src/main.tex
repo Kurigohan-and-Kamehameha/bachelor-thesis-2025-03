@@ -1,0 +1,115 @@
+\documentclass[a4paper, 12pt]{scrreprt}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{minted}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{pdfpages}
+\usepackage{array}
+\usepackage{svg}
+\usepackage{booktabs} 
+\usepackage{comment}
+
+\everymath{\displaystyle}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\setminted[python]{fontsize=\footnotesize}
+\setmintedinline{fontsize=\currentfontsize}
+
+\setcounter{secnumdepth}{4}
+
+\usepackage[backend=biber,sorting=ynt]{biblatex}
+\addbibresource{lib.bib}
+
+\title{Bachelorthesis}
+\author{Marlon Zarnke}
+\date{August 2024}
+
+\newcommand*{\field}[1]{\mathbb{#1}}%
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+\newpage
+\thispagestyle{empty}
+
+\includepdf[pages=1]{pdf/Thesis_Bachelor-WS 2024-Marlon Zarnke.pdf}
+
+\newpage
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\begin{center}
+\textbf{Eidesstattliche Erklärung}\\
+Ich erkläre, dass ich die Arbeit selbstständig angefertigt und nur die angegebenen
+Hilfsmittel benutzt habe. Alle Stellen, die dem Wortlaut oder dem Sinn nach anderen
+Werken, gegebenenfalls auch elektronischen Medien, entnommen sind, sind von mir
+durch Angabe der Quelle als Entlehnung kenntlich gemacht. Dies gilt auch für
+Zeichnungen, Skizzen, Bilder und andere visuelle Darstellungen.\\
+Karlsruhe, 23.01.2025, Marlon Zarnke
+\end{center}
+
+
+
+\newpage
+\begin{center}
+\underline{\textbf{Danksagung}}\\
+An dieser Stelle möchte ich mich bei all denjenigen bedanken, die mich während der Entstehung dieser Arbeit unterstützt haben. Mein besonderer Dank gilt meinem Betreuer, Philipp Reis, für seine Zeit, die kontinuierliche Betreuung sowie sein wertvolles Feedback und die Anregungen zur Durchführung dieser Arbeit. Diese haben mir sehr geholfen, die Arbeit in die richtige Richtung zu lenken. Ebenso danke ich ihm für die umfassende Unterstützung bei der Durchführung der Untersuchungen sowie für die Beantwortung und Klärung offener Fragen meinerseits.
+
+Ein herzliches Dankeschön auch an meine Familie, deren Geduld\\
+und Unterstützung mir in dieser herausfordernden Zeit sehr geholfen haben.
+
+Ohne die Hilfe all dieser Menschen wäre diese Arbeit nicht in der vorliegenden Form möglich gewesen. Ich danke allen sehr für ihre Unterstützung.
+\end{center}
+
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\include{chapter/01_Einleitung}
+\include{chapter/02_Grundlagen}
+\include{chapter/03_Related Work}
+%\include{chapter/04_Metriken}
+\include{chapter/05_Konzept}
+\include{chapter/06_Modelle}
+\include{chapter/07_Evaluation}
+\include{chapter/08_Fazit}
+\include{chapter/Anhang}
+
+\printbibliography
+
+\end{document}
